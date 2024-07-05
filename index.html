@@ -121,6 +121,33 @@
             </script>
 </head>
 <body>
-    
+    <div>
+        <button onclick="changeFace('normal')" class="button1"> Позитив </button>
+        <button onclick="changeFace('negative')" class="button1"> Негатив </button>
+    </div>
+
+    <div>
+        <button onclick="slider.right();" class="button2"> < </button>	
+        <div id="maindiv">
+            <div id="scr"></div>
+        </div> 
+        <button onclick="slider.left();" class="button2"> > </button>
+    </div>
+
+    <div>
+        <button onclick="sliderOne.right();" class="button2"> < </button>	
+        <div id="maindivOne" >
+            <div id="scrOne"></div>
+        </div> 
+        <button onclick="sliderOne.left();" class="button2"> > </button>
+    </div>
+
+    <div>
+        <button onclick="sliderTwo.right();" class="button2"> < </button>	
+        <div id="maindivTwo">
+            <div id="scrTwo" ></div>
+        </div> 
+        <button onclick="sliderTwo.left();" class="button2"> > </button>
+    </div>
 </body>
 </html>
