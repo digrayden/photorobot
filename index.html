@@ -75,6 +75,50 @@
             
         }
         </style>
+        <script>
+	
+            const slideWidth = 143;
+        
+            function createSlider(id) {
+            return {
+        
+                slides: 4,
+                frame: 0,
+        
+                set(image) {
+                    document.getElementById(id).style.backgroundPositionX = -image * slideWidth + "px";
+                },
+                
+                init() {
+                    this.set(0);
+                },
+        
+                left() {
+                    this.frame--;
+                    if (this.frame < 0) this.frame = this.slides - 1;
+                    this.set(this.frame);
+                },
+                
+                right() {
+                    this.frame++;
+                    if (this.frame === this.slides) this.frame = 0;
+                    this.set(this.frame);
+                }
+            };
+        }
+        
+        const slider = createSlider("scr");
+        const sliderOne = createSlider("scrOne");
+        const sliderTwo = createSlider("scrTwo");
+        
+        function changeFace(mode) {
+            const faces = document.querySelectorAll("#maindiv, #maindivOne, #maindivTwo");
+            faces.forEach(face => {
+                face.style.filter = mode === 'negative' ? 'invert(100%)' : 'none';
+            });
+        }
+        
+            </script>
 </head>
 <body>
     
