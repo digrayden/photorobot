@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photorobot</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #maindiv {
+            float:left;
+            margin: 0px auto;
+            width: 143px;
+            height: 75px;
+            overflow-x: hidden;
+        }
+        #maindivOne {
+            float:left;
+            margin: 0px auto;
+            width: 143px;
+            height: 56px;
+            overflow-x: hidden;
+        }
+        #maindivTwo {
+            float:left;
+            margin: 0px auto;
+            width: 143px;
+            height: 60px;
+            overflow-x: hidden;
+        }
+        #scr {
+            margin:0px auto;
+            height: 75px;
+            background-color: white;
+            background: url("images/fotorobotsUp.jpg") no-repeat;
+            background-repeat:repeat-x;
+            
+        }
+        #scrOne {
+            margin:0px auto;
+            height: 56px;
+            background-color: white;
+            background: url("images/fotorobotsMidle.jpg") no-repeat;
+            background-repeat:repeat-x;
+            
+        }
+        #scrTwo {
+            margin:0px auto;
+            height: 60px;
+            background-color: white;
+            background: url("images/fotorobotsDown.jpg") no-repeat;
+            background-repeat:repeat-x;
+            
+        }
+        .button1 {
+            margin:50px 20px 25px 0px;
+            float: left;
+            font-weight: bold;
+            text-align: center;
+            width: 120px;
+            height: 30px;
+            border-radius: 15px;
+            
+        }
+        .button2 {
+            margin:10px 20px;
+            float: left;
+            text-align: center;
+            background-color: transparent;
+            border: none;
+            font-size: 25px;
+            
+        }
+        </style>
+        <script>
+	
+            const slideWidth = 143;
+        
+            function createSlider(id) {
+            return {
+        
+                slides: 4,
+                frame: 0,
+        
+                set(image) {
+                    document.getElementById(id).style.backgroundPositionX = -image * slideWidth + "px";
+                },
+                
+                init() {
+                    this.set(0);
+                },
+        
+                left() {
+                    this.frame--;
+                    if (this.frame < 0) this.frame = this.slides - 1;
+                    this.set(this.frame);
+                },
+                
+                right() {
+                    this.frame++;
+                    if (this.frame === this.slides) this.frame = 0;
+                    this.set(this.frame);
+                }
+            };
+        }
+        
+        const slider = createSlider("scr");
+        const sliderOne = createSlider("scrOne");
+        const sliderTwo = createSlider("scrTwo");
+        
+        function changeFace(mode) {
+            const faces = document.querySelectorAll("#maindiv, #maindivOne, #maindivTwo");
+            faces.forEach(face => {
+                face.style.filter = mode === 'negative' ? 'invert(100%)' : 'none';
+            });
+        }
+        
+            </script>
+</head>
+<body>
+    <div>
+        <button onclick="changeFace('normal')" class="button1"> Позитив </button>
+        <button onclick="changeFace('negative')" class="button1"> Негатив </button>
+    </div>
+
+    <div>
+        <button onclick="slider.right();" class="button2"> < </button>	
+        <div id="maindiv">
+            <div id="scr"></div>
+        </div> 
+        <button onclick="slider.left();" class="button2"> > </button>
+    </div>
+
+    <div>
+        <button onclick="sliderOne.right();" class="button2"> < </button>	
+        <div id="maindivOne" >
+            <div id="scrOne"></div>
+        </div> 
+        <button onclick="sliderOne.left();" class="button2"> > </button>
+    </div>
+
+    <div>
+        <button onclick="sliderTwo.right();" class="button2"> < </button>	
+        <div id="maindivTwo">
+            <div id="scrTwo" ></div>
+        </div> 
+        <button onclick="sliderTwo.left();" class="button2"> > </button>
+    </div>
+</body>
+</html>
